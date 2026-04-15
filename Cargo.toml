@@ -1,0 +1,26 @@
+[package]
+name = "rtt-semihosting"
+version = "0.1.0"
+edition = "2024"
+
+[features]
+# Create rtt control block
+rtt-cb = []
+rtt = ["rtt-cb"]
+# Echo rtt input
+rtt-input = ["rtt"]
+# Print via semihosting
+semihosting = []
+
+[dependencies]
+arrayvec = { version = "0.7.6", default-features = false }
+cortex-m = { version = "0.7.7", features = ["critical-section-single-core"] }
+cortex-m-rt = "0.7.5"
+critical-section = "1.2.0"
+panic-halt = "1.0.0"
+rtt-target = "0.6.2"
+semihosting = { version = "0.1.25", features = ["stdio"] }
+
+# [profile.release]
+# debug = 2
+# lto = true
