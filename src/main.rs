@@ -7,9 +7,9 @@ use cortex_m::{Peripherals, delay::Delay};
 use cortex_m_rt::entry;
 use panic_halt as _;
 use rtt_target::{ChannelMode, DownChannel, rprint, rprintln, rtt_init, set_print_channel};
-use semihosting::println as sprintln;
 use arrayvec::ArrayString;
 use core::fmt::Write as _;
+use cortex_m_semihosting::hprintln;
 
 #[entry]
 unsafe fn main() -> ! {
@@ -68,7 +68,7 @@ unsafe fn main() -> ! {
             buf.clear();
             // buffering reduces the number of semihosting syscalls
             let _ = write!(&mut buf,"Hello from semihosting: {}", i);
-            sprintln!("{}", buf.as_str());
+            hprintln!("{}", buf.as_str());
         }
 
         if i < 20 {
